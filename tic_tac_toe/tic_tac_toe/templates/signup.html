@@ -1,0 +1,30 @@
+{% block content %}
+  {% if form.errors %}
+    <p>{{form.errors}}</p>
+  {% endif %}
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please sign in with an account that has access.</p>
+    {% else %}
+      <p>Please sign in to see this page.</p>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.email.label_tag }}</td>
+        <td>{{ form.email }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{{ form.name }}</td>
+      </tr>
+    </table>
+    <input type="submit" value="Sign up" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load mathfilters %}
+{% load index %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="{% static 'game.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% if board %}
+        <div class="layout">
+            <div class="flex">
+                <table class="game-table">
+                    {% for row in board_size_range %}
+                        <tr>
+                            {% for col in board_size_range %}
+                                {% with cell=row|mul:board_size|add:col  %}
+                                    {% with cell_value=board|index:cell %}
+                                        <td class="cell" data-row="{{ row }}" data-col="{{ col }}">{{ cell_value }}</td>
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <p>You are: {{player_designation}}</p>
+        <!--<button type="button" id="clearBoard">Clear Board</button>-->
+        <p><a href="{% url 'new_game' %}">New game</a></p>
+        <p><a href="{% url 'signout' %}">Sign out</a></p>
+
+        <p><span id="message"></span></p>
+        {% csrf_token %}
+    {% endif %}
+</body>
+</html>

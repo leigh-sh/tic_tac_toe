@@ -1,0 +1,18 @@
+table td {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    text-align: center;
+    font-size: 80px;
+    font-family: fantasy, monospace;
+}
+
+.layout {
+    display: flex;
+}
+
+.flex {
+    margin-right: 40px;
+    max-width: 300px;
+    flex-basis: 300px;
+}
